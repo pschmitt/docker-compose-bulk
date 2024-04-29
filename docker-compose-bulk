@@ -6,7 +6,7 @@ usage() {
 
 find_compose_files() {
   local compose_files
-  mapfile -t compose_files < <(find -L /srv -maxdepth 2 -iname docker compose.yaml)
+  mapfile -t compose_files < <(find -L /srv -maxdepth 2 -iname docker-compose.yaml)
 
   # Output all docker compose files if NO_IGNORE is set
   if [[ -n "$NO_IGNORE" ]]
