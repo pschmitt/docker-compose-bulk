@@ -4,6 +4,15 @@ usage() {
   echo "Usage: $(basename "$0") ACTION"
 }
 
+source_env_files() {
+  local file
+  for file in /etc/containers/env/*.env
+  do
+    # shellcheck disable=SC1090
+    source <(sed -r 's#([^=]+)=(.*)#export \1=\2#' "$file")
+  done
+}
+
 find_compose_files() {
   local compose_files
   mapfile -t compose_files < <(find -L /srv -maxdepth 2 -iname docker-compose.yaml 2>/dev/null)
@@ -137,5 +146,6 @@ then
       ;;
   esac
 
+  source_env_files
   compose_bulk "${ACTION[@]}"
 fi
