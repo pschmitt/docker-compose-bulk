@@ -49,7 +49,7 @@
       in
       {
         # pkgs
-        packages.myl = dcpPkg;
+        packages.docker-compose-bulk = dcpPkg;
         defaultPackage = dcpPkg;
       }
     );
