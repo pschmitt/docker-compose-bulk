@@ -108,6 +108,7 @@ healthcheck() {
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
+  source_env_files
   set -e
 
   ACTION=()
@@ -146,6 +147,5 @@ then
       ;;
   esac
 
-  source_env_files
   compose_bulk "${ACTION[@]}"
 fi
