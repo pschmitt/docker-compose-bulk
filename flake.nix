@@ -33,7 +33,9 @@
             wrapProgram $out/bin/docker-compose-bulk --prefix PATH : ${
               pkgs.lib.makeBinPath [
                 pkgs.bash
+                pkgs.coreutils
                 pkgs.docker
+                pkgs.nettools # for hostname bin
               ]
             }
           '';
