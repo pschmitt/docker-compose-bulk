@@ -4,6 +4,22 @@ usage() {
   echo "Usage: $(basename "$0") ACTION"
 }
 
+setup_environment() {
+  export_hostname
+  source_env_files
+}
+
+export_hostname() {
+  local hn="$HOSTNAME"
+
+  if [[ -z $hn ]]
+  then
+    hn="$(hostname:-"$(uname -n)")"
+  fi
+
+  export HOSTNAME="$hn"
+}
+
 source_env_files() {
   local file
   for file in /etc/containers/env/*.env
@@ -108,7 +124,7 @@ healthcheck() {
 
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]
 then
-  source_env_files
+  setup_environment
   set -e
 
   ACTION=()
