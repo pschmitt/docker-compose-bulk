@@ -10,3 +10,7 @@ Compose projects.
 - Before adding or changing workflows, check for reusable workflows or actions
   in [ci-workflows](https://github.com/pschmitt/ci-workflows) and preserve
   existing caller behavior and check coverage.
+- Keep `packages.default` canonical and retain the named
+  `docker-compose-bulk` package output; do not add the legacy `defaultPackage`
+  alias.
+- Run Nix evaluation and builds on an `rworker`, never on the local host.
