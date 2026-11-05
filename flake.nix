@@ -6,10 +6,8 @@
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs =
-    { nixpkgs, flake-utils, ... }:
-    flake-utils.lib.eachDefaultSystem (
-      system:
+  outputs = { nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
       let
         pkgs = nixpkgs.legacyPackages.${system};
 
@@ -37,18 +35,17 @@
           '';
 
           meta = with pkgs.lib; {
-            description = "Simple docker compose wrapper to perform bulk operations.";
+            description =
+              "Simple docker compose wrapper to perform bulk operations.";
             license = licenses.gpl3Only;
             maintainers = with maintainers; [ pschmitt ];
             mainProgram = "docker-compose-bulk";
             platforms = platforms.all;
           };
         };
-      in
-      {
+      in {
         # pkgs
         packages.docker-compose-bulk = dcpPkg;
         packages.default = dcpPkg;
-      }
-    );
+      });
 }
